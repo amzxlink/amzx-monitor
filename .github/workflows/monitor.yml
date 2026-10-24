@@ -35,7 +35,7 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          SEND_TEST_ALERT: ${{ inputs.test_alert }}
+          SEND_TEST_ALERT: ${{ inputs.test_alert || (github.event_name == 'push' && github.event.head_commit.message == 'Enviar resumo de teste AMZX') }}
         run: python3 monitor.py
       - name: Salvar estado e histórico
         if: always() && steps.monitor.outcome != 'skipped'

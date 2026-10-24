@@ -183,6 +183,26 @@ def daily_summary(meta, history, targets, now, config):
     meta['summary_day'] = day
 
 
+def test_report(state, targets, now, config):
+    local = now.astimezone(ZoneInfo(config.get('timezone', 'America/Manaus')))
+    lines = ['🧪 RESUMO DE TESTE — AMZX',
+             local.strftime('%d/%m/%Y às %H:%M (Manaus)'),
+             '', 'Estado na verificação atual:']
+    for target in targets:
+        item = state.get(target['id'], {})
+        icon = '🟢' if item.get('status') == 'online' else '🔴'
+        lines.append(f'{icon} {target["name"]}: {item.get("status", "desconhecido")} — {item.get("response_seconds", 0):.2f}s')
+    for host, cert in state.get('_monitor', {}).get('certificates', {}).items():
+        if cert.get('alert_level') == 'error':
+            lines.append(f'🔐 HTTPS {host}: consulta de certificado indisponível.')
+        else:
+            lines.append(f'🔐 HTTPS {host}: aproximadamente {cert.get("days", "?")} dias até vencer.')
+    lines += ['', '⏱ Verificação programada: a cada 5 minutos.',
+              '📊 Resumo diário: após 08h de Manaus.',
+              'Teste pontual. Não indica uma queda e não ativa mensagens a cada consulta.']
+    return '\n'.join(lines)
+
+
 def validate(config):
     targets = config['targets']
     if not 1 <= len(targets) <= 10:
@@ -231,7 +251,7 @@ def main():
     tls_check(meta,{urllib.parse.urlsplit(t['url']).hostname for t in targets},now,config.get('tls_warning_days',21))
     daily_summary(meta,history,targets,now,config)
     if os.environ.get('SEND_TEST_ALERT')=='true':
-        meta['pending'].append(f'🧪 Teste manual AMZX: envio ao Telegram funcionando. {stamp}')
+        meta['pending'].append(test_report(state, targets, now, config))
     # Persiste antes do envio: preserva medições se o processo for interrompido.
     write_json(hp,history); write_json(path,state)
     for key in [t['id'] for t in targets]+['_monitor']:
