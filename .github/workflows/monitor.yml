@@ -1,35 +1,42 @@
 name: Monitor AMZX
-
 on:
+  push:
+    branches: [main]
+    paths:
+      - monitor.py
+      - config.json
+      - test_monitor.py
+      - test_improvements.py
+      - .github/workflows/monitor.yml
   schedule:
-    - cron: '7,17,27,37,47,57 * * * *'
+    - cron: '3,8,13,18,23,28,33,38,43,48,53,58 * * * *'
   workflow_dispatch:
-
+    inputs:
+      test_alert:
+        description: Enviar mensagem de teste ao Telegram
+        type: boolean
+        default: false
 permissions:
   contents: write
-
 concurrency:
   group: amzx-monitor
   cancel-in-progress: false
-
 jobs:
   check:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0 (Node 24)
       - name: Testar o monitor
-        run: python3 -m unittest -v test_monitor.py
-
+        run: python3 -m unittest discover -v
       - name: Verificar site e enviar alertas
         id: monitor
         continue-on-error: true
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SEND_TEST_ALERT: ${{ inputs.test_alert }}
         run: python3 monitor.py
-
       - name: Salvar estado e histórico
         if: always() && steps.monitor.outcome != 'skipped'
         run: |
@@ -40,7 +47,6 @@ jobs:
             git commit -m 'Atualizar histórico do monitor'
             git push
           fi
-
       - name: Sinalizar indisponibilidade ou alerta pendente
         if: steps.monitor.outcome == 'failure'
         run: exit 1

@@ -1,5 +1,12 @@
 {
+  "timezone": "America/Manaus",
+  "summary_hour": 8,
+  "slow_seconds": 5,
+  "slow_consecutive": 3,
+  "tls_warning_days": 21,
   "targets": [
-    {"id": "amzx", "name": "AMZX Link", "url": "https://amzx.link/", "expected_text": "AMZX"}
+    {"id": "amzx", "name": "AMZX principal", "url": "https://amzx.link/", "expected_text": "AMZX"},
+    {"id": "login", "name": "AMZX login", "url": "https://amzx.link/user/login", "expected_text": "password"},
+    {"id": "bio", "name": "AMZX Bio Junior", "url": "https://amzx.link/junior", "expected_text": "Francisco Junior"}
   ]
 }
