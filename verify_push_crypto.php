@@ -16,7 +16,7 @@ $header=implode("\n",$packet['headers']);preg_match('/vapid t=([^,]+),/',$header
 $raw=MonitorPush::decode($parts[2]);check(strlen($raw)===64,'JOSE signature size');
 $encode=function($v){$v=ltrim($v,"\0");if(ord($v[0])&128)$v="\0".$v;return "\x02".chr(strlen($v)).$v;};$ints=$encode(substr($raw,0,32)).$encode(substr($raw,32));$der="\x30".chr(strlen($ints)).$ints;
 check(openssl_verify($parts[0].'.'.$parts[1],$der,openssl_pkey_get_public(MonitorPush::publicPem($vpublic)),OPENSSL_ALGO_SHA256)===1,'signature verified');
-foreach(['https://127.0.0.1/x','http://fcm.googleapis.com/x','https://fcm.googleapis.com.evil.example/x','https://user:pass@fcm.googleapis.com/x','https://fcm.googleapis.com:444/x']as $url){try{MonitorPush::endpoint($url);check(false,'bad endpoint');}catch(RuntimeException $e){check(true,'blocked endpoint');}}
-try{MonitorPush::packet($sub,['body'=>str_repeat('x',3500)],$config);check(false,'payload bound');}catch(RuntimeException $e){check(true,'payload bound');}
-try{MonitorPush::packet($sub,$payload,['public_key'=>'wrong','private_key'=>$vp]);check(false,'mismatched key');}catch(RuntimeException $e){check(true,'mismatched key');}
+foreach(['https://127.0.0.1/x','http://fcm.googleapis.com/x','https://fcm.googleapis.com.evil.example/x','https://user:pass@fcm.googleapis.com/x','https://fcm.googleapis.com:444/x']as $url){$blocked=false;try{MonitorPush::endpoint($url);}catch(RuntimeException $e){$blocked=true;}check($blocked,'blocked endpoint');}
+$blocked=false;try{MonitorPush::packet($sub,['body'=>str_repeat('x',3500)],$config);}catch(RuntimeException $e){$blocked=true;}check($blocked,'payload bound');
+$blocked=false;try{MonitorPush::packet($sub,$payload,['public_key'=>'wrong','private_key'=>$vp]);}catch(RuntimeException $e){$blocked=true;}check($blocked,'mismatched key');
 echo "$count verificações criptográficas passaram, sem envio externo.\n";

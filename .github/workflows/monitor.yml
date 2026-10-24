@@ -6,6 +6,7 @@ on:
       - monitor.py
       - push_delivery.py
       - push_sender.php
+      - verify_push_crypto.php
       - test_push.py
       - config.json
       - test_monitor.py

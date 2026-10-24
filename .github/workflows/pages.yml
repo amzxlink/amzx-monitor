@@ -5,6 +5,7 @@ on:
     paths:
       - 'site/**'
       - '.github/workflows/pages.yml'
+      - 'test_worker.cjs'
   workflow_dispatch:
 permissions:
   contents: read
@@ -25,6 +26,7 @@ jobs:
         run: |
           node --check site/app.js
           node --check site/sw.js
+          node test_worker.cjs
       - name: Configurar Pages
         uses: actions/configure-pages@v5
       - name: Preparar publicação

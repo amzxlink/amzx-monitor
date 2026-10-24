@@ -1,0 +1,11 @@
+const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/strict');
+const handlers={},sent=[];let opened=null,deleted=[];
+const context={URL,self:{location:{href:'https://amzxlink.github.io/amzx-monitor/sw.js'},addEventListener:(key,fn)=>handlers[key]=fn,skipWaiting:async()=>{},registration:{showNotification:async(t,o)=>sent.push({t,o})},clients:{claim:async()=>{},matchAll:async()=>[],openWindow:async url=>{opened=url;}}},caches:{keys:async()=>['amzx-monitor-shell-old','another-app'],delete:async name=>deleted.push(name),open:async()=>({addAll:async()=>{}})}};
+vm.runInNewContext(fs.readFileSync('site/sw.js','utf8'),context);
+(async()=>{let checks=0,promise;const waitUntil=p=>promise=p;
+handlers.push({data:{json:()=>({title:'AMZX',body:'Queda simulada',urgent:true,tag:'test',url:'https://malicious.example/'})},waitUntil});await promise;
+assert.equal(sent[0].o.silent,false);checks++;assert.equal(sent[0].o.renotify,true);checks++;assert.equal(sent[0].o.vibrate.length,5);checks++;assert.equal(sent[0].o.data.url,'https://amzxlink.github.io/amzx-monitor/');checks++;assert.equal(sent[0].o.requireInteraction,true);checks++;
+handlers.push({data:{json:()=>{throw Error('invalid')}},waitUntil});await promise;assert.equal(sent.length,2);checks++;
+handlers.notificationclick({notification:{close:()=>{},data:{url:'https://malicious.example/'}},waitUntil});await promise;assert.equal(opened,'https://amzxlink.github.io/amzx-monitor/');checks++;
+handlers.activate({waitUntil});await promise;assert.deepEqual(deleted,['amzx-monitor-shell-old']);checks++;
+console.log(checks+' verificações do Service Worker passaram.');})().catch(e=>{console.error(e.message);process.exit(1)});

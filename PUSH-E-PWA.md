@@ -49,6 +49,7 @@ Principal, login e Bio com HTTP 200 e conteúdo esperado. Percentual de amostras
 
 - 54 testes Python: 38 anteriores e 16 de fila/entrega Web Push, sem mensagens reais.
 - 17 verificações criptográficas PHP: descriptografia pelo lado receptor, Unicode, JWT, assinatura ES256 verificada, urgência, TTL, chaves incompatíveis e endpoints maliciosos.
+- 8 verificações automatizadas do Service Worker, incluindo vibração, sinalização de alerta, clique seguro e preservação do cache de outros apps.
 - JavaScript validado com node --check; navegação/histórico/permissão negada e ausência de transbordamento horizontal conferidos no navegador, incluindo iframe de largura mobile.
 - Entrega real ao Android e som só podem ser confirmados após permitir notificações e cadastrar o Secret no aparelho do proprietário.
 
