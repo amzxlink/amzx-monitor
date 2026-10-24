@@ -46,12 +46,35 @@ jobs:
         continue-on-error: true
         env:
           AMZX_WEBPUSH_CONFIG: ${{ secrets.AMZX_WEBPUSH_CONFIG }}
-          SEND_PUSH_TEST: ${{ inputs.test_push }}
+          SEND_PUSH_TEST: ${{ inputs.test_push || (github.event_name == 'push' && github.event.head_commit.message == 'Validar ativação e teste remoto do Web Push' && secrets.AMZX_WEBPUSH_CONFIG != '') }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           SIMULATE_DOWN_ALERT: ${{ github.event_name == 'push' && github.event.head_commit.message == 'Enviar teste de queda AMZX' }}
           SEND_TEST_ALERT: ${{ inputs.test_alert || (github.event_name == 'push' && (github.event.head_commit.message == 'Enviar resumo de teste AMZX' || github.event.head_commit.message == 'Enviar teste de queda AMZX')) }}
         run: python3 monitor.py
+      - name: Conferir ativação do Android
+        if: always() && steps.monitor.outcome != 'skipped'
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          path = Path('data/state.json')
+          state = json.loads(path.read_text()) if path.exists() else {}
+          meta = state.get('_monitor', {})
+          count = len(meta.get('push_devices', []))
+          queued = len(meta.get('push_queue', []))
+          configured = bool(meta.get('push_configured'))
+          text = ('## Ativação do Web Push\n\n'
+                  + ('Configuração reconhecida: ' + str(count) + ' aparelho(s).\n' if configured else
+                     'Nenhum aparelho reconhecido nesta execução. Abra o PWA no seu Android, permita notificações e cadastre a configuração no Secret AMZX_WEBPUSH_CONFIG.\n')
+                  + '\nAlertas pendentes na fila: ' + str(queued) + '.\n'
+                  + '\nEntrega no aparelho e som precisam ser confirmados pelo proprietário.\n')
+          print(text)
+          summary = os.environ.get('GITHUB_STEP_SUMMARY')
+          if summary:
+              with open(summary, 'a') as output:
+                  output.write(text)
+          PY
       - name: Salvar estado e histórico
         if: always() && steps.monitor.outcome != 'skipped'
         run: |
