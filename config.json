@@ -1,0 +1,5 @@
+{
+  "targets": [
+    {"id": "amzx", "name": "AMZX Link", "url": "https://amzx.link/", "expected_text": "AMZX"}
+  ]
+}
