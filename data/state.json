@@ -2,8 +2,37 @@
   "amzx": {
     "pending": [],
     "status": "online",
-    "checked_at": "2026-10-24T20:31:42+00:00",
+    "checked_at": "2026-10-24T20:37:45+00:00",
     "detail": "HTTP 200 e conteúdo conferido",
-    "response_seconds": 0.801
+    "response_seconds": 2.087,
+    "slow_count": 0
+  },
+  "login": {
+    "pending": [],
+    "status": "online",
+    "checked_at": "2026-10-24T20:37:45+00:00",
+    "detail": "HTTP 200 e conteúdo conferido",
+    "slow_count": 0,
+    "response_seconds": 1.565
+  },
+  "bio": {
+    "pending": [],
+    "status": "online",
+    "checked_at": "2026-10-24T20:37:45+00:00",
+    "detail": "HTTP 200 e conteúdo conferido",
+    "slow_count": 0,
+    "response_seconds": 3.094
+  },
+  "_monitor": {
+    "pending": [],
+    "certificates": {
+      "amzx.link": {
+        "checked_date": "2026-10-24",
+        "alert_level": "ok",
+        "days": 76,
+        "expires_at": "2027-01-08T23:49:40+00:00"
+      }
+    },
+    "summary_day": "2026-10-23"
   }
 }
