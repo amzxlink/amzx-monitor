@@ -23,7 +23,31 @@ function serviceCard(target,stale){const s=data.state[target.id],rows=data.histo
 function renderHistory(){const filtered=data.history.filter(r=>$('history-filter').value==='all'||r.id===$('history-filter').value).slice().reverse();$('history-body').replaceChildren(...filtered.slice(0,limit).map(r=>{const tr=el('tr');tr.append(el('td','',datetime(r.time)),el('td','',NAMES[r.id]||r.id));const td=el('td');td.append(el('span','status-pill'+(r.online?'':' offline'),r.online?'Online':'Falha'));tr.append(td,el('td','',seconds(r.seconds)));return tr;}));$('history-empty').hidden=filtered.length>0;$('more-history').hidden=filtered.length<=limit;}
 $('history-filter').addEventListener('change',()=>{limit=60;renderHistory();});$('more-history').addEventListener('click',()=>{limit+=100;renderHistory();});$('refresh').addEventListener('click',refresh);
 $('export').addEventListener('click',()=>{if(!data.history.length)return toast('Ainda não há medições para exportar.');const csv=['horario_utc,servico,online,segundos',...data.history.map(r=>[r.time,r.id.replace(/[^a-z0-9_-]/gi,''),r.online,r.seconds].join(','))].join('\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const a=el('a');a.href=url;a.download='amzx-monitor-consultas.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
-window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;$('install').hidden=false;});$('install').addEventListener('click',async()=>{if(!installPrompt)return;await installPrompt.prompt();installPrompt=null;$('install').hidden=true;});window.addEventListener('appinstalled',()=>{$('install').hidden=true;toast('AMZX Monitor instalado.');});
+// O atalho de instalação permanece visível mesmo sem convite automático.
+function isInstalled(){return matchMedia('(display-mode: standalone)').matches || navigator.standalone===true;}
+function installUI(){
+ const installed=isInstalled();
+ $('install').hidden=installed;
+ $('install-banner').hidden=installed;
+ $('install-native').hidden=installed||!installPrompt;
+ const ua=navigator.userAgent;
+ let message='No Chrome do Android: toque no menu ⋮ e escolha “Adicionar à tela inicial” ou “Instalar aplicativo”. Abra esta página no Chrome, fora do navegador interno do WhatsApp ou Instagram.';
+ if(installed)message='O AMZX Monitor já está aberto como aplicativo neste aparelho.';
+ else if(installPrompt)message='A instalação está disponível neste navegador. Toque em “Instalar agora” e confirme o convite do navegador.';
+ else if(/iphone|ipad|ipod/i.test(ua))message='No Safari: toque em Compartilhar e depois em “Adicionar à Tela de Início”.';
+ else if(!/android/i.test(ua))message='No Chrome ou Edge, procure o ícone de instalação na barra de endereço ou a opção de instalar este site no menu do navegador. No Android, abra esta página no Chrome e use “Adicionar à tela inicial”.';
+ $('install-guidance').textContent=message;
+}
+function showInstall(){installUI();if(!$('install-dialog').open)$('install-dialog').showModal();}
+window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;installUI();});
+$('install').addEventListener('click',showInstall);
+document.querySelectorAll('[data-install]').forEach(n=>n.addEventListener('click',showInstall));
+$('close-install').addEventListener('click',()=>$('install-dialog').close());
+$('install-dialog').addEventListener('click',event=>{if(event.target===$('install-dialog')){const r=event.target.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)event.target.close();}});
+$('install-native').addEventListener('click',async()=>{if(!installPrompt)return;const prompt=installPrompt;installPrompt=null;await prompt.prompt();const choice=await prompt.userChoice;if(choice.outcome==='accepted'){$('install-dialog').close();toast('Instalação solicitada ao navegador.');}installUI();});
+window.addEventListener('appinstalled',()=>{installPrompt=null;$('install').hidden=true;$('install-banner').hidden=true;$('install-dialog').close();toast('AMZX Monitor instalado. Abra pelo ícone na tela inicial.');});
+$('install-refresh').addEventListener('click',async()=>{try{const r=await worker();await r.update();}catch(_){}installUI();toast('Estado conferido. Se não houver convite, use o menu do Chrome.');});
+installUI();
 async function worker(){if(!window.isSecureContext||!('serviceWorker'in navigator))throw new Error('Abra por HTTPS em um navegador compatível.');if(!registration)registration=await navigator.serviceWorker.register('./sw.js',{scope:'./',updateViaCache:'none'});await navigator.serviceWorker.ready;return registration;}
 const b64=bytes=>btoa(String.fromCharCode(...new Uint8Array(bytes))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
 function pem(bytes){return '-----BEGIN PRIVATE KEY-----\n'+btoa(String.fromCharCode(...new Uint8Array(bytes))).match(/.{1,64}/g).join('\n')+'\n-----END PRIVATE KEY-----\n';}
@@ -37,3 +61,4 @@ $('sound-test').addEventListener('click',async()=>{try{const audio=new (window.A
 $('unsubscribe').addEventListener('click',async()=>{if(!confirm('Desativar as notificações deste aparelho? O Telegram continuará funcionando.'))return;try{const r=await worker(),s=await r.pushManager.getSubscription();if(s)await s.unsubscribe();privateConfig=null;$('copy-config').disabled=true;$('private-config').value='';$('secret-fallback').hidden=true;$('push-feedback').textContent='Push desativado neste aparelho. Remova também seu cadastro do Secret se não for reutilizá-lo.';diagnose();}catch(_){toast('Não foi possível desativar. Tente novamente.');}});
 window.addEventListener('online',refresh);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refresh();});setInterval(()=>{if(document.visibilityState==='visible')refresh();},60000);
 try{const cached=JSON.parse(localStorage.getItem('amzx-monitor-public-cache')||'null');if(cached?.state&&Array.isArray(cached.history))data={state:cached.state,history:validHistory(cached.history)};}catch(_){}tab(location.hash.slice(1));render();refresh();worker().catch(()=>{});
+

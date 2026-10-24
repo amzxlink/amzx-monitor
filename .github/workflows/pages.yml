@@ -6,6 +6,7 @@ on:
       - 'site/**'
       - '.github/workflows/pages.yml'
       - 'test_worker.cjs'
+      - 'test_install.cjs'
   workflow_dispatch:
 permissions:
   contents: read
@@ -27,6 +28,7 @@ jobs:
           node --check site/app.js
           node --check site/sw.js
           node test_worker.cjs
+          node test_install.cjs
       - name: Configurar Pages
         uses: actions/configure-pages@v5
       - name: Preparar publicação
@@ -36,3 +38,4 @@ jobs:
       - name: Publicar
         id: deployment
         uses: actions/deploy-pages@v4
+
