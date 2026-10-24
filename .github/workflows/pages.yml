@@ -1,0 +1,36 @@
+name: Publicar AMZX Monitor
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+      - name: Validar JavaScript
+        run: |
+          node --check site/app.js
+          node --check site/sw.js
+      - name: Configurar Pages
+        uses: actions/configure-pages@v5
+      - name: Preparar publicação
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+      - name: Publicar
+        id: deployment
+        uses: actions/deploy-pages@v4

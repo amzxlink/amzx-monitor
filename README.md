@@ -1,31 +1,31 @@
-# Monitor externo AMZX v2.0
+# AMZX Monitor v3.0
 
-Monitor gratuito para GitHub Actions com Telegram. Independente da hospedagem AMZX, sem alterar o encurtador.
+Central de disponibilidade independente do AMZX Link, com PWA para Android, Web Push e Telegram.
 
-## Recursos
+## Aplicativo
 
-- Agendamento a cada 5 minutos (melhor esforço do GitHub).
-- Landing page, login e Bio com HTTP 200, HTTPS/domínio final e trecho esperado no HTML.
-- Três tentativas antes de registrar queda.
-- Avisos de queda e recuperação, com duração observada e fila persistente.
-- Lentidão acima de 5 segundos em três verificações online consecutivas; aviso de normalização.
-- Verificação diária do certificado TLS, aviso antecipado e de renovação.
-- Resumo do dia anterior na primeira execução após 08h de Manaus, com cobertura de medições e disponibilidade entre amostras.
-- Botão manual para enviar mensagem de teste, sem alterar o site.
-- Diagnóstico do Telegram por código, sem expor token ou corpo remoto.
-- Histórico recente de 32 dias, com estado compatível com v1.
+Após habilitar GitHub Pages, a interface ficará em https://amzxlink.github.io/amzx-monitor/. Em Settings → Pages, escolha Source: GitHub Actions e execute o workflow Publicar AMZX Monitor.
 
-**Atualização e testes no GitHub:** veja [ATUALIZAR.md](ATUALIZAR.md). Preserve os Secrets e a pasta data existentes.
+- Painel responsivo com principal, login e Bio.
+- Histórico, exportação CSV, cache offline da interface e aviso de dados antigos.
+- Push próprio adaptado do AMZX, com chaves e inscrições independentes.
+- Alertas de queda, recuperação, lentidão e certificado, com resumo diário após 08h de Manaus.
+- Telegram preservado como segundo canal.
 
-Para instalação nova, envie os arquivos à raiz do repositório público, incluindo .github/workflows/monitor.yml. Cadastre os Secrets TELEGRAM_BOT_TOKEN e TELEGRAM_CHAT_ID em Settings → Secrets and variables → Actions. O bot deve pertencer ao grupo e poder enviar mensagens. Não envie o token para o código. Permita contents: write para salvar estado/histórico. Execute Actions → Monitor AMZX → Run workflow com a opção de teste marcada. O script cria data automaticamente na primeira execução.
+## Ativar push no Android
 
-Teste local sem envio real: `python3 -m unittest discover -v`. Python 3.10 ou posterior, biblioteca padrão, nenhum pacote pip. Testado com 38 casos: migração v1, quedas, recuperação, fila, lentidão, resumo e fuso, cobertura, certificados e diagnóstico sem vazamento.
+Abra **Avisos**, prepare o aparelho e copie a configuração privada para o Secret **AMZX_WEBPUSH_CONFIG** deste repositório. Execute Monitor AMZX com **Enviar teste de Web Push** marcado. Não publique a configuração nem compartilhe a chave privada. O push e o som precisam ser confirmados no aparelho; não são considerados ativos só por abrir a interface.
 
-Não é verificação de login autenticado, pagamentos ou banco. Não garante monitoramento em tempo real. Leia as limitações no tutorial. Não publique URLs privadas, tokens ou informações pessoais; os resultados ficam no repositório público. Nenhuma página de status ou web push foi adicionada.
+O tutorial completo, limites e manutenção estão em [PUSH-E-PWA.md](PUSH-E-PWA.md). O tutorial anterior [ATUALIZAR.md](ATUALIZAR.md) trata da versão 2.0.
 
-## Fontes oficiais
+## Testes
 
-- https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule
-- https://docs.github.com/en/actions/concepts/billing-and-usage
-- https://core.telegram.org/bots/api
-- https://github.com/actions/checkout
+`python3 -m unittest discover -v`: 54 testes, incluindo os 38 anteriores e as filas independentes de push.
+
+`php verify_push_crypto.php`: 17 verificações com descriptografia pelo receptor, assinatura VAPID e bloqueio de endpoints inválidos. Sem envio externo durante esses testes.
+
+`node --check site/app.js` e `node --check site/sw.js`: sintaxe da interface e worker.
+
+## Operação
+
+Agendamento solicitado a cada cinco minutos, sem garantia de pontualidade do GitHub. Os dados públicos são consultados do repositório; a página sinaliza medições acima de 15 minutos. O envio é executado em Actions, fora da hospedagem AMZX. Não valida transações, banco ou login autenticado. A interface não requer projeto Firebase próprio; o serviço de entrega depende do navegador.

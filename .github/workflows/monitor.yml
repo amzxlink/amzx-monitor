@@ -4,6 +4,9 @@ on:
     branches: [main]
     paths:
       - monitor.py
+      - push_delivery.py
+      - push_sender.php
+      - test_push.py
       - config.json
       - test_monitor.py
       - test_improvements.py
@@ -14,6 +17,10 @@ on:
     inputs:
       test_alert:
         description: Enviar mensagem de teste ao Telegram
+        type: boolean
+        default: false
+      test_push:
+        description: Enviar teste de Web Push para os aparelhos cadastrados
         type: boolean
         default: false
 permissions:
@@ -27,12 +34,18 @@ jobs:
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0 (Node 24)
+      - name: Validar PHP do emissor de push
+        run: php -l push_sender.php
+      - name: Verificar criptografia Web Push
+        run: php verify_push_crypto.php
       - name: Testar o monitor
         run: python3 -m unittest discover -v
       - name: Verificar site e enviar alertas
         id: monitor
         continue-on-error: true
         env:
+          AMZX_WEBPUSH_CONFIG: ${{ secrets.AMZX_WEBPUSH_CONFIG }}
+          SEND_PUSH_TEST: ${{ inputs.test_push }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           SIMULATE_DOWN_ALERT: ${{ github.event_name == 'push' && github.event.head_commit.message == 'Enviar teste de queda AMZX' }}
@@ -51,3 +64,4 @@ jobs:
       - name: Sinalizar indisponibilidade ou alerta pendente
         if: steps.monitor.outcome == 'failure'
         run: exit 1
+

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Monitor externo AMZX. Python padrão; nenhum pacote externo."""
+import push_delivery
 import datetime as dt
 import json
 import os
@@ -260,11 +261,30 @@ def main():
                 + local.strftime('Enviado em %d/%m/%Y às %H:%M (Manaus).'))
         else:
             meta['pending'].append(test_report(state, targets, now, config))
+    push_ids = None
+    try:
+        push_ids = push_delivery.devices()
+    except (ValueError, KeyError, TypeError):
+        print('Web Push: Secret inválido. Recrie AMZX_WEBPUSH_CONFIG na tela Avisos.')
+        failed = True
+    push_delivery.queue_events(state, [t['id'] for t in targets], push_ids)
+    meta['push_devices'] = push_ids or []
+    if os.environ.get('SEND_PUSH_TEST') == 'true':
+        if push_ids:
+            import hashlib
+            payload = {'title':'AMZX Monitor · Teste remoto', 'body':'Teste de entrega pelo GitHub. Não houve queda real. Confira o som e a vibração.', 'url':'./', 'urgent':True, 'renotify':True, 'tag':'amzx-push-test-'+stamp}
+            meta.setdefault('push_queue', []).append({'id':hashlib.sha256(stamp.encode()).hexdigest(),'remaining':list(push_ids),'payload':payload})
+        else:
+            print('Web Push: para testar, primeiro cadastre AMZX_WEBPUSH_CONFIG nos Secrets.')
+            failed = True
     # Persiste antes do envio: preserva medições se o processo for interrompido.
     write_json(hp,history); write_json(path,state)
     for key in [t['id'] for t in targets]+['_monitor']:
         sent=flush(state[key]); failed=failed or not sent
         write_json(path,state)
+    push_ok = push_delivery.deliver(state, push_ids)
+    failed = failed or not push_ok
+    write_json(path, state)
     if failed:
         print('Execução com site indisponível ou alerta pendente; veja o diagnóstico acima.')
     return int(failed)
@@ -272,3 +292,4 @@ def main():
 
 if __name__=='__main__':
     raise SystemExit(main())
+
