@@ -1,0 +1,11 @@
+{
+  "amzx": {
+    "pending": [
+      "✅ Monitor ativado: AMZX Link está online."
+    ],
+    "status": "online",
+    "checked_at": "2026-10-24T20:28:06+00:00",
+    "detail": "HTTP 200 e conteúdo conferido",
+    "response_seconds": 0.758
+  }
+}
