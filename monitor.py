@@ -251,7 +251,15 @@ def main():
     tls_check(meta,{urllib.parse.urlsplit(t['url']).hostname for t in targets},now,config.get('tls_warning_days',21))
     daily_summary(meta,history,targets,now,config)
     if os.environ.get('SEND_TEST_ALERT')=='true':
-        meta['pending'].append(test_report(state, targets, now, config))
+        if os.environ.get('SIMULATE_DOWN_ALERT') == 'true':
+            local = now.astimezone(ZoneInfo(config.get('timezone', 'America/Manaus')))
+            meta['pending'].append(
+                '🔴 TESTE SIMULADO DE QUEDA — AMZX\n\n'
+                '🔔 Esta mensagem serve para testar o som das notificações do grupo.\n'
+                'Não é uma queda real e o site não foi interrompido.\n'
+                + local.strftime('Enviado em %d/%m/%Y às %H:%M (Manaus).'))
+        else:
+            meta['pending'].append(test_report(state, targets, now, config))
     # Persiste antes do envio: preserva medições se o processo for interrompido.
     write_json(hp,history); write_json(path,state)
     for key in [t['id'] for t in targets]+['_monitor']:
