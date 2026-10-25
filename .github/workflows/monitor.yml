@@ -88,4 +88,4 @@ jobs:
       - name: Sinalizar indisponibilidade ou alerta pendente
         if: steps.monitor.outcome == 'failure'
         run: exit 1
-
+# Revalidar cadastro do Android após salvar o Secret.
