@@ -1,12 +1,13 @@
 /* Worker independente, adaptado do receptor Web Push/PWA do AMZX Link. */
 'use strict';
-const CACHE='amzx-monitor-shell-v3-2';
+const CACHE='amzx-monitor-shell-v3-3';
 const BASE=new URL('./',self.location.href);
-const SHELL=['./','./index.html','./styles.css','./app.js','./manifest.webmanifest','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-512.png','./icons/amzx-logo.png','./icons/badge.png'].map(p=>new URL(p,BASE).href);
+const SHELL=['./','./index.html','./styles.css','./app.js','./merge-config.js','./manifest.webmanifest','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-512.png','./icons/amzx-logo.png','./icons/badge.png'].map(p=>new URL(p,BASE).href);
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(names=>Promise.all(names.filter(n=>n.startsWith('amzx-monitor-shell-')&&n!==CACHE).map(n=>caches.delete(n)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{const url=new URL(event.request.url);if(event.request.method!=='GET'||url.origin!==BASE.origin||!url.pathname.startsWith(BASE.pathname))return;if(!SHELL.includes(url.href))return;event.respondWith(fetch(event.request).then(response=>{if(response.ok){const copy=response.clone();caches.open(CACHE).then(c=>c.put(event.request,copy));}return response;}).catch(()=>caches.match(event.request)));});
 self.addEventListener('push',event=>{let data={};try{data=event.data?event.data.json():{};}catch(_){data={body:'Há uma nova atualização no monitor.'};}const urgent=Boolean(data.urgent);const options={body:String(data.body||'Consulte a central de disponibilidade.'),icon:new URL('./icons/icon-192.png',BASE).href,badge:new URL('./icons/badge.png',BASE).href,tag:String(data.tag||'amzx-monitor'),renotify:true,silent:false,vibrate:urgent?[350,120,350,120,350]:[180,80,180],requireInteraction:urgent,data:{url:new URL('./',BASE).href},actions:[{action:'open',title:'Abrir monitor'}]};event.waitUntil(self.registration.showNotification(String(data.title||'AMZX Monitor'),options));});
 self.addEventListener('notificationclick',event=>{event.notification.close();const target=BASE.href;event.waitUntil(self.clients.matchAll({type:'window',includeUncontrolled:true}).then(async windows=>{for(const client of windows){if(client.url.startsWith(BASE.href)&&'focus'in client){await client.navigate(target);return client.focus();}}return self.clients.openWindow(target);}));});
 self.addEventListener('pushsubscriptionchange',event=>{event.waitUntil(self.registration.showNotification('AMZX Monitor · Renove sua ativação',{body:'A inscrição deste navegador mudou. Abra Avisos e atualize a configuração no GitHub.',icon:new URL('./icons/icon-192.png',BASE).href,tag:'amzx-renew',data:{url:BASE.href}}));});
+
 

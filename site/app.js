@@ -62,3 +62,26 @@ $('unsubscribe').addEventListener('click',async()=>{if(!confirm('Desativar as no
 window.addEventListener('online',refresh);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refresh();});setInterval(()=>{if(document.visibilityState==='visible')refresh();},60000);
 try{const cached=JSON.parse(localStorage.getItem('amzx-monitor-public-cache')||'null');if(cached?.state&&Array.isArray(cached.history))data={state:cached.state,history:validHistory(cached.history)};}catch(_){}tab(location.hash.slice(1));render();refresh();worker().catch(()=>{});
 
+
+
+// Vários aparelhos: os códigos privados não entram em fetch, logs ou localStorage.
+(()=>{
+ let result=null,generation=0;
+ const clear=()=>{generation++;result=null;for(const id of ['merge-previous','merge-next','merge-result'])$(id).value='';$('merge-copy').disabled=true;$('merge-output').hidden=true;$('merge-feedback').textContent='Códigos limpos deste formulário.';};
+ const invalidate=()=>{generation++;result=null;$('merge-result').value='';$('merge-output').hidden=true;$('merge-copy').disabled=true;$('merge-feedback').textContent='Confira os códigos e toque em Juntar aparelhos.';};
+ for(const id of ['merge-previous','merge-next'])$(id).addEventListener('input',invalidate);
+ $('merge-use-current').addEventListener('click',()=>{if(!privateConfig)return toast('Primeiro prepare as notificações neste aparelho ou cole o código já gerado.');$('merge-next').value=privateConfig;invalidate();toast('Cadastro deste aparelho preenchido.');});
+ $('merge-build').addEventListener('click',async()=>{
+  const run=++generation;result=null;$('merge-result').value='';$('merge-output').hidden=true;$('merge-copy').disabled=true;$('merge-build').disabled=true;
+  try{
+   const combined=await AMZXMerge.merge($('merge-previous').value,$('merge-next').value);
+   if(run!==generation)return;
+   result=JSON.stringify(combined);$('merge-result').value=result;$('merge-output').hidden=false;$('merge-copy').disabled=false;
+   const labels=combined.devices.map((d,i)=>(i+1)+'. '+d.label).join(' · ');
+   $('merge-feedback').textContent=combined.devices.length+' aparelho(s) no código final: '+labels+'. Agora copie e substitua somente o valor do Secret AMZX_WEBPUSH_CONFIG no GitHub.';
+  }catch(error){if(run===generation)$('merge-feedback').textContent=error.message||'Não foi possível juntar os aparelhos.';}finally{$('merge-build').disabled=false;}
+ });
+ $('merge-copy').addEventListener('click',async()=>{if(!result)return;try{await navigator.clipboard.writeText(result);toast('Código combinado copiado. Cole no Secret AMZX_WEBPUSH_CONFIG.');}catch(_){$('merge-result').focus();$('merge-result').select();toast('Código selecionado. Use Copiar e cole no Secret do GitHub.');}});
+ $('merge-clear').addEventListener('click',clear);
+ window.addEventListener('pagehide',clear);
+})();
