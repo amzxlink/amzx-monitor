@@ -5,8 +5,38 @@
   "slow_consecutive": 3,
   "tls_warning_days": 21,
   "targets": [
-    {"id": "amzx", "name": "AMZX principal", "url": "https://amzx.link/", "expected_text": "AMZX"},
-    {"id": "login", "name": "AMZX login", "url": "https://amzx.link/user/login", "expected_text": "password"},
-    {"id": "bio", "name": "AMZX Bio Junior", "url": "https://amzx.link/junior", "expected_text": "Francisco Junior"}
+    {
+      "id": "amzx",
+      "name": "AMZX principal",
+      "url": "https://amzx.link/",
+      "expected_text": "AMZX",
+      "forbidden_texts": [
+        "Composer detected issues in your platform",
+        "SQLSTATE[",
+        "Fatal error:"
+      ]
+    },
+    {
+      "id": "login",
+      "name": "AMZX login",
+      "url": "https://amzx.link/user/login",
+      "expected_text": "password",
+      "forbidden_texts": [
+        "Composer detected issues in your platform",
+        "SQLSTATE[",
+        "Fatal error:"
+      ]
+    },
+    {
+      "id": "bio",
+      "name": "AMZX Bio Junior",
+      "url": "https://amzx.link/junior",
+      "expected_text": "Francisco Junior",
+      "forbidden_texts": [
+        "Composer detected issues in your platform",
+        "SQLSTATE[",
+        "Fatal error:"
+      ]
+    }
   ]
 }

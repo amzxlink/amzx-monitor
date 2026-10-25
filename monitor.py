@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Monitor externo AMZX. Python padrão; nenhum pacote externo."""
 import push_delivery
+import watchdog
 import datetime as dt
 import json
 import os
@@ -22,14 +23,20 @@ def probe(target, opener=urllib.request.urlopen):
         req = urllib.request.Request(target['url'], headers={'User-Agent': 'AMZX-Uptime/1.0', 'Accept-Encoding': 'identity'})
         with opener(req, timeout=20) as response:
             code = response.status
-            final = urllib.parse.urlsplit(response.geturl())
+            response_url = response.geturl()
+            final = urllib.parse.urlsplit(response_url)
             body = response.read(1024 * 1024).decode('utf-8', errors='replace')
         if final.scheme != 'https':
             return False, 'Redirecionamento sem HTTPS', round(time.monotonic()-start, 3)
-        if final.hostname != urllib.parse.urlsplit(target['url']).hostname:
+        expected_final = target.get('expected_final_url')
+        if expected_final and response_url != expected_final:
+            return False, 'Destino final diferente do esperado', round(time.monotonic()-start, 3)
+        if not expected_final and final.hostname != urllib.parse.urlsplit(target['url']).hostname:
             return False, 'Redirecionamento para outro domínio', round(time.monotonic()-start, 3)
         if code != 200:
             return False, f'HTTP {code}', round(time.monotonic()-start, 3)
+        if any(marker.casefold() in body.casefold() for marker in target.get('forbidden_texts', [])):
+            return False, 'Página retornou mensagem de erro da aplicação', round(time.monotonic()-start, 3)
         if target.get('expected_text', '').casefold() not in body.casefold():
             return False, 'Conteúdo esperado ausente', round(time.monotonic()-start, 3)
         return True, 'HTTP 200 e conteúdo conferido', round(time.monotonic()-start, 3)
@@ -214,6 +221,14 @@ def validate(config):
             raise ValueError('Use URL HTTPS pública, porta 443, sem credenciais ou parâmetros.')
         if not isinstance(t.get('expected_text'),str) or not t['expected_text'].strip():
             raise ValueError('Cada alvo precisa de expected_text não vazio.')
+        destination = t.get('expected_final_url')
+        if destination is not None:
+            final = urllib.parse.urlsplit(destination)
+            if final.scheme != 'https' or not final.hostname or final.username or final.password or final.port not in (None, 443) or final.fragment:
+                raise ValueError('Destino de teste precisa de URL HTTPS sem credenciais ou fragmento.')
+        forbidden = t.get('forbidden_texts', [])
+        if not isinstance(forbidden, list) or any(not isinstance(v, str) or not v.strip() for v in forbidden):
+            raise ValueError('Mensagens de erro precisam ser uma lista de textos não vazios.')
     ids=[t['id'] for t in targets]
     if len(set(ids))!=len(ids) or any(i.startswith('_') for i in ids):
         raise ValueError('IDs devem ser únicos e não começar por _.')
@@ -235,6 +250,8 @@ def main():
     state=json.loads(path.read_text()) if path.exists() else {}
     history=json.loads(hp.read_text()) if hp.exists() else []
     now=dt.datetime.now(dt.timezone.utc); stamp=now.isoformat(timespec='seconds')
+    meta=state.setdefault('_monitor',{'pending':[]})
+    watchdog.recovery(meta, now, [state.get(t['id'], {}).get('checked_at') for t in targets])
     failed=False
     with ThreadPoolExecutor(max_workers=4) as pool:
         results=list(pool.map(check,targets))
@@ -284,6 +301,8 @@ def main():
         write_json(path,state)
     push_ok = push_delivery.deliver(state, push_ids)
     failed = failed or not push_ok
+    meta['completed_at'] = dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds')
+    meta['completed_run_id'] = os.environ.get('GITHUB_RUN_ID', '')
     write_json(path, state)
     if failed:
         print('Execução com site indisponível ou alerta pendente; veja o diagnóstico acima.')
@@ -292,4 +311,5 @@ def main():
 
 if __name__=='__main__':
     raise SystemExit(main())
+
 

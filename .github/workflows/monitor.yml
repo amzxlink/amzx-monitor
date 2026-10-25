@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths:
       - monitor.py
+      - watchdog.py
+      - test_watchdog.py
       - push_delivery.py
       - push_sender.php
       - verify_push_crypto.php
@@ -76,6 +78,7 @@ jobs:
                   output.write(text)
           PY
       - name: Salvar estado e histórico
+        id: persist
         if: always() && steps.monitor.outcome != 'skipped'
         run: |
           git config user.name 'github-actions[bot]'
@@ -85,7 +88,13 @@ jobs:
             git commit -m 'Atualizar histórico do monitor'
             git push
           fi
+      - name: Confirmar execução ao vigia externo
+        if: always() && steps.persist.outcome == 'success'
+        env:
+          MONITOR_HEARTBEAT_URL: ${{ secrets.MONITOR_HEARTBEAT_URL }}
+        run: python3 watchdog.py
       - name: Sinalizar indisponibilidade ou alerta pendente
         if: steps.monitor.outcome == 'failure'
         run: exit 1
 # Revalidar cadastro do Android após salvar o Secret.
+
