@@ -2,27 +2,27 @@
   "amzx": {
     "pending": [],
     "status": "online",
-    "checked_at": "2026-10-25T20:01:18+00:00",
+    "checked_at": "2026-10-25T22:30:48+00:00",
     "detail": "HTTP 200 e conteúdo conferido",
-    "response_seconds": 1.028,
+    "response_seconds": 1.861,
     "slow_count": 0
   },
   "login": {
     "pending": [],
     "status": "online",
-    "checked_at": "2026-10-25T20:01:18+00:00",
+    "checked_at": "2026-10-25T22:30:48+00:00",
     "detail": "HTTP 200 e conteúdo conferido",
     "slow_count": 0,
-    "response_seconds": 0.619,
+    "response_seconds": 1.387,
     "slow_active": false
   },
   "bio": {
     "pending": [],
     "status": "online",
-    "checked_at": "2026-10-25T20:01:18+00:00",
+    "checked_at": "2026-10-25T22:30:48+00:00",
     "detail": "HTTP 200 e conteúdo conferido",
     "slow_count": 0,
-    "response_seconds": 2.026,
+    "response_seconds": 2.733,
     "slow_active": false
   },
   "_monitor": {
@@ -46,17 +46,18 @@
       "16c4019e0f1a20f189f4dd2ea0aef27b7ab37deb104530e7930589241c988d43",
       "182d5c02c5de69638846a0331f360ec0998d9170b3d14b9506444ce6d80d9a80",
       "31edd56498a8558ee49ebd8c91dc2b8f9273639f0aabbddd463f6bac714940a1",
-      "72719edd7f3265a0a83305882ef1cc010c18300262802dbd43dbff6c2b5aab6c"
+      "72719edd7f3265a0a83305882ef1cc010c18300262802dbd43dbff6c2b5aab6c",
+      "d188eee885d919568e1a04ffd7e59be5ee8a063f870b6087f0df29df71cadc15"
     ],
     "push_configured": true,
     "push_devices": [
       "401a2f632d28c2bb8161cb544ec16744e4d8d6935d9a330e1dac723e89eba9be"
     ],
     "last_gap": {
-      "resumed_at": "2026-10-25T20:01:18+00:00",
-      "seconds": 8295
+      "resumed_at": "2026-10-25T22:30:48+00:00",
+      "seconds": 8967
     },
-    "completed_at": "2026-10-25T20:01:21+00:00",
-    "completed_run_id": "40228774661"
+    "completed_at": "2026-10-25T22:30:52+00:00",
+    "completed_run_id": "40240533972"
   }
 }
