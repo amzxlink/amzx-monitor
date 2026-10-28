@@ -2,27 +2,27 @@
   "amzx": {
     "pending": [],
     "status": "online",
-    "checked_at": "2026-10-28T07:28:43+00:00",
+    "checked_at": "2026-10-28T14:26:15+00:00",
     "detail": "HTTP 200 e conteúdo conferido",
-    "response_seconds": 2.045,
+    "response_seconds": 2.023,
     "slow_count": 0
   },
   "login": {
     "pending": [],
     "status": "online",
-    "checked_at": "2026-10-28T07:28:43+00:00",
+    "checked_at": "2026-10-28T14:26:15+00:00",
     "detail": "HTTP 200 e conteúdo conferido",
     "slow_count": 0,
-    "response_seconds": 1.647,
+    "response_seconds": 1.591,
     "slow_active": false
   },
   "bio": {
     "pending": [],
     "status": "online",
-    "checked_at": "2026-10-28T07:28:43+00:00",
+    "checked_at": "2026-10-28T14:26:15+00:00",
     "detail": "HTTP 200 e conteúdo conferido",
     "slow_count": 0,
-    "response_seconds": 3.0,
+    "response_seconds": 2.967,
     "slow_active": false
   },
   "_monitor": {
@@ -35,7 +35,7 @@
         "expires_at": "2027-01-08T23:49:40+00:00"
       }
     },
-    "summary_day": "2026-10-26",
+    "summary_day": "2026-10-27",
     "push_queue": [],
     "push_seen": [
       "97f13ae3861a150fea1c6aedee328dba62a055c62141a45fb7b2fdbae48ec66f",
@@ -61,17 +61,19 @@
       "d17f9ce70450433c4438887be1905dd973791a18409bd0360197b2ee4c13ac93",
       "c8e92309a49f584b8f3ae9e48ab76167a5b66c76b1b8df88fff5865906c53d3c",
       "bcc11d4eaa9ef7bd54960a532214adc359c312b0f5c83185a06c089eeca87ccf",
-      "c202233d6dbfec003ee7e83271bea66099e3f1e14b9c33d576876ce266f98f3a"
+      "c202233d6dbfec003ee7e83271bea66099e3f1e14b9c33d576876ce266f98f3a",
+      "1b5373917d674cc3c2261a95598f8d85a5a99fe462c7035a8842ad1f5133b305",
+      "474221c42462c6a11839d5469058b075bc5d19d2a731d59c529b37280c3fa916"
     ],
     "push_configured": true,
     "push_devices": [
       "401a2f632d28c2bb8161cb544ec16744e4d8d6935d9a330e1dac723e89eba9be"
     ],
     "last_gap": {
-      "resumed_at": "2026-10-28T07:28:43+00:00",
-      "seconds": 21055
+      "resumed_at": "2026-10-28T14:26:15+00:00",
+      "seconds": 25049
     },
-    "completed_at": "2026-10-28T07:28:46+00:00",
-    "completed_run_id": "40650318187"
+    "completed_at": "2026-10-28T14:26:20+00:00",
+    "completed_run_id": "40705894159"
   }
 }
