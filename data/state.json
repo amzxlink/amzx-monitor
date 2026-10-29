@@ -2,27 +2,27 @@
   "amzx": {
     "pending": [],
     "status": "online",
-    "checked_at": "2026-10-29T16:30:09+00:00",
+    "checked_at": "2026-10-29T21:24:13+00:00",
     "detail": "HTTP 200 e conteúdo conferido",
-    "response_seconds": 1.424,
+    "response_seconds": 1.241,
     "slow_count": 0
   },
   "login": {
     "pending": [],
     "status": "online",
-    "checked_at": "2026-10-29T16:30:09+00:00",
+    "checked_at": "2026-10-29T21:24:13+00:00",
     "detail": "HTTP 200 e conteúdo conferido",
     "slow_count": 0,
-    "response_seconds": 0.837,
+    "response_seconds": 0.909,
     "slow_active": false
   },
   "bio": {
     "pending": [],
     "status": "online",
-    "checked_at": "2026-10-29T16:30:09+00:00",
+    "checked_at": "2026-10-29T21:24:13+00:00",
     "detail": "HTTP 200 e conteúdo conferido",
     "slow_count": 0,
-    "response_seconds": 2.392,
+    "response_seconds": 2.129,
     "slow_active": false
   },
   "_monitor": {
@@ -69,17 +69,18 @@
       "a0e6119b66712b2af0feedac2e15dce8511cdff915cddb9048cc95d9c82324e2",
       "42157cbc539476796a5134d402a28ad507be1b5b0f17c96c351d35eaa3f820a9",
       "a65a7c2676397646e6a0f0d841f2a77e4c46c65616dc8549bfe69fdc2d2aa5a1",
-      "362ccd949ade5e011596c55dea0b2da6aaf38941b97b1a7c6d94d87d5f1f029c"
+      "362ccd949ade5e011596c55dea0b2da6aaf38941b97b1a7c6d94d87d5f1f029c",
+      "e711baec39f5898742e70e5e2991da61f540b098dd51bbfb55a6c37c762eb8aa"
     ],
     "push_configured": true,
     "push_devices": [
       "401a2f632d28c2bb8161cb544ec16744e4d8d6935d9a330e1dac723e89eba9be"
     ],
     "last_gap": {
-      "resumed_at": "2026-10-29T16:30:09+00:00",
-      "seconds": 24118
+      "resumed_at": "2026-10-29T21:24:13+00:00",
+      "seconds": 17640
     },
-    "completed_at": "2026-10-29T16:30:13+00:00",
-    "completed_run_id": "40912171634"
+    "completed_at": "2026-10-29T21:24:16+00:00",
+    "completed_run_id": "40957483801"
   }
 }
