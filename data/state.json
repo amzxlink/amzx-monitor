@@ -2,28 +2,30 @@
   "amzx": {
     "pending": [],
     "status": "online",
-    "checked_at": "2026-10-31T02:31:18+00:00",
+    "checked_at": "2026-10-31T08:51:05+00:00",
     "detail": "HTTP 200 e conteúdo conferido",
-    "response_seconds": 0.98,
+    "response_seconds": 0.117,
     "slow_count": 0
   },
   "login": {
     "pending": [],
-    "status": "online",
-    "checked_at": "2026-10-31T02:31:18+00:00",
-    "detail": "HTTP 200 e conteúdo conferido",
+    "status": "offline",
+    "checked_at": "2026-10-31T08:51:05+00:00",
+    "detail": "Conteúdo esperado ausente",
     "slow_count": 0,
-    "response_seconds": 0.675,
-    "slow_active": false
+    "response_seconds": 0.048,
+    "slow_active": false,
+    "down_since": "2026-10-31T08:51:05+00:00"
   },
   "bio": {
     "pending": [],
-    "status": "online",
-    "checked_at": "2026-10-31T02:31:18+00:00",
-    "detail": "HTTP 200 e conteúdo conferido",
+    "status": "offline",
+    "checked_at": "2026-10-31T08:51:05+00:00",
+    "detail": "Conteúdo esperado ausente",
     "slow_count": 0,
-    "response_seconds": 1.465,
-    "slow_active": false
+    "response_seconds": 0.046,
+    "slow_active": false,
+    "down_since": "2026-10-31T08:51:05+00:00"
   },
   "_monitor": {
     "pending": [],
@@ -76,17 +78,20 @@
       "80fbc0b7bf2cf6201cbc4dcdbdaed951fa02a571e9c68710231b617e3281a72d",
       "fcc26ad239b7aab6a6651a163f58567c10434ee74ac0c4b062e7aabe351753ee",
       "694e722345b7ecdbf5cc3f168f76256a20630487df300b7b180ce9484f8c87f0",
-      "b5163bae8fd5c8effaa96299db0c5139c5a9448c3f63ab5e641a86d5db760944"
+      "b5163bae8fd5c8effaa96299db0c5139c5a9448c3f63ab5e641a86d5db760944",
+      "aa41419eb6a432cb8cad5d88d8192e6b1961789e9031d29af024e32a9887d988",
+      "4d3011f23763d63cf10df59efbe577e3181f98500013db849406c0ed155515e1",
+      "4e71b79a96d1be333c430c9fa351020676805e01f9330c7e2faf917e94579fed"
     ],
     "push_configured": true,
     "push_devices": [
       "401a2f632d28c2bb8161cb544ec16744e4d8d6935d9a330e1dac723e89eba9be"
     ],
     "last_gap": {
-      "resumed_at": "2026-10-31T02:31:18+00:00",
-      "seconds": 11711
+      "resumed_at": "2026-10-31T08:51:05+00:00",
+      "seconds": 22784
     },
-    "completed_at": "2026-10-31T02:31:21+00:00",
-    "completed_run_id": "41160372722"
+    "completed_at": "2026-10-31T08:51:17+00:00",
+    "completed_run_id": "41186262961"
   }
 }
