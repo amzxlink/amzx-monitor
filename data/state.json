@@ -2,27 +2,27 @@
   "amzx": {
     "pending": [],
     "status": "online",
-    "checked_at": "2026-11-02T02:31:29+00:00",
+    "checked_at": "2026-11-02T09:55:39+00:00",
     "detail": "HTTP 200 e conteúdo conferido",
-    "response_seconds": 1.764,
+    "response_seconds": 1.015,
     "slow_count": 0
   },
   "login": {
     "pending": [],
     "status": "online",
-    "checked_at": "2026-11-02T02:31:29+00:00",
+    "checked_at": "2026-11-02T09:55:39+00:00",
     "detail": "HTTP 200 e conteúdo conferido",
     "slow_count": 0,
-    "response_seconds": 1.473,
+    "response_seconds": 0.705,
     "slow_active": false
   },
   "bio": {
     "pending": [],
     "status": "online",
-    "checked_at": "2026-11-02T02:31:29+00:00",
+    "checked_at": "2026-11-02T09:55:39+00:00",
     "detail": "HTTP 200 e conteúdo conferido",
     "slow_count": 0,
-    "response_seconds": 2.705,
+    "response_seconds": 1.969,
     "slow_active": false
   },
   "_monitor": {
@@ -90,17 +90,18 @@
       "2d8eaa8860a04edb0466f95a7a2f3998be4168fd8fde71083ae6ffcb23893fa9",
       "a1413a2640dbae76ceae40a91adafe04ab22d81b2b662d132476131dbe39a7e1",
       "b39ef00fc291cd9155ef34573d945f94bcb4bf1bdefe7099ed37e3b9ca8dd6ad",
-      "32cc01992471c8af419e9d7fc7479324828cf7c5655e706b23ae0db52bbe0dfa"
+      "32cc01992471c8af419e9d7fc7479324828cf7c5655e706b23ae0db52bbe0dfa",
+      "eba0996ffb1ab4374bd84f624899dde4c1fe77551c65635b0136914ebb9bfc60"
     ],
     "push_configured": true,
     "push_devices": [
       "401a2f632d28c2bb8161cb544ec16744e4d8d6935d9a330e1dac723e89eba9be"
     ],
     "last_gap": {
-      "resumed_at": "2026-11-02T02:31:29+00:00",
-      "seconds": 12239
+      "resumed_at": "2026-11-02T09:55:39+00:00",
+      "seconds": 26647
     },
-    "completed_at": "2026-11-02T02:31:32+00:00",
-    "completed_run_id": "41378179447"
+    "completed_at": "2026-11-02T09:55:42+00:00",
+    "completed_run_id": "41424596190"
   }
 }
