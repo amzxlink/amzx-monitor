@@ -1608,5 +1608,26 @@
     "online": true,
     "seconds": 1.688,
     "detail": "HTTP 200 e conteúdo conferido"
+  },
+  {
+    "time": "2026-11-08T19:09:22+00:00",
+    "id": "amzx",
+    "online": true,
+    "seconds": 2.274,
+    "detail": "HTTP 200 e conteúdo conferido"
+  },
+  {
+    "time": "2026-11-08T19:09:22+00:00",
+    "id": "login",
+    "online": true,
+    "seconds": 1.831,
+    "detail": "HTTP 200 e conteúdo conferido"
+  },
+  {
+    "time": "2026-11-08T19:09:22+00:00",
+    "id": "bio",
+    "online": true,
+    "seconds": 3.504,
+    "detail": "HTTP 200 e conteúdo conferido"
   }
 ]
