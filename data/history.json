@@ -2280,5 +2280,26 @@
     "online": false,
     "seconds": 0.432,
     "detail": "Conteúdo esperado ausente"
+  },
+  {
+    "time": "2026-11-17T08:35:36+00:00",
+    "id": "amzx",
+    "online": true,
+    "seconds": 1.963,
+    "detail": "HTTP 200 e conteúdo conferido"
+  },
+  {
+    "time": "2026-11-17T08:35:36+00:00",
+    "id": "login",
+    "online": true,
+    "seconds": 1.529,
+    "detail": "HTTP 200 e conteúdo conferido"
+  },
+  {
+    "time": "2026-11-17T08:35:36+00:00",
+    "id": "bio",
+    "online": true,
+    "seconds": 2.889,
+    "detail": "HTTP 200 e conteúdo conferido"
   }
 ]
