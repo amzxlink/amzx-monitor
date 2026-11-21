@@ -2,28 +2,30 @@
   "amzx": {
     "pending": [],
     "status": "online",
-    "checked_at": "2026-11-21T15:40:40+00:00",
+    "checked_at": "2026-11-21T21:12:42+00:00",
     "detail": "HTTP 200 e conteúdo conferido",
-    "response_seconds": 1.834,
+    "response_seconds": 0.127,
     "slow_count": 0
   },
   "login": {
     "pending": [],
-    "status": "online",
-    "checked_at": "2026-11-21T15:40:40+00:00",
-    "detail": "HTTP 200 e conteúdo conferido",
+    "status": "offline",
+    "checked_at": "2026-11-21T21:12:42+00:00",
+    "detail": "Conteúdo esperado ausente",
     "slow_count": 0,
-    "response_seconds": 1.483,
-    "slow_active": false
+    "response_seconds": 0.086,
+    "slow_active": false,
+    "down_since": "2026-11-21T21:12:42+00:00"
   },
   "bio": {
     "pending": [],
-    "status": "online",
-    "checked_at": "2026-11-21T15:40:40+00:00",
-    "detail": "HTTP 200 e conteúdo conferido",
+    "status": "offline",
+    "checked_at": "2026-11-21T21:12:42+00:00",
+    "detail": "Conteúdo esperado ausente",
     "slow_count": 0,
-    "response_seconds": 2.806,
-    "slow_active": false
+    "response_seconds": 0.086,
+    "slow_active": false,
+    "down_since": "2026-11-21T21:12:42+00:00"
   },
   "_monitor": {
     "pending": [],
@@ -187,17 +189,20 @@
       "1c160ba5f2969f9989f68f687a70cb3b3984c659209e5ef2fdbd6162f1074aed",
       "b1b1f347333765998627907cfc79605140ae0dd1ec148431b37f2297139b3d4a",
       "590423af6707aa01c407007c57fc827487a79ea544c5cbbfa53d6f6edd29652d",
-      "a354185b5438895ca5260f7f617e3c6a4a9f3eb875adbdada0554fcd10d9b7c2"
+      "a354185b5438895ca5260f7f617e3c6a4a9f3eb875adbdada0554fcd10d9b7c2",
+      "afe66dee4aa46ab09c90314a236b7ace9afe96f2bc9fd277901824cf37c4c61f",
+      "78f937bbba0a48bb8485beca132417783637546caec6da1a4ef6f7aaa6d88252",
+      "f30b629c14ae59e1a78f0e8e39826f57053e1ab0d5e23d97b16c26dc30ce9ee4"
     ],
     "push_configured": true,
     "push_devices": [
       "401a2f632d28c2bb8161cb544ec16744e4d8d6935d9a330e1dac723e89eba9be"
     ],
     "last_gap": {
-      "resumed_at": "2026-11-21T15:40:40+00:00",
-      "seconds": 28461
+      "resumed_at": "2026-11-21T21:12:42+00:00",
+      "seconds": 19918
     },
-    "completed_at": "2026-11-21T15:40:44+00:00",
-    "completed_run_id": "44920443687"
+    "completed_at": "2026-11-21T21:12:54+00:00",
+    "completed_run_id": "44950331360"
   }
 }
