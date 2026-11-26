@@ -2,28 +2,30 @@
   "amzx": {
     "pending": [],
     "status": "online",
-    "checked_at": "2026-11-26T03:45:52+00:00",
+    "checked_at": "2026-11-26T13:15:45+00:00",
     "detail": "HTTP 200 e conteúdo conferido",
-    "response_seconds": 1.855,
+    "response_seconds": 0.162,
     "slow_count": 0
   },
   "login": {
     "pending": [],
-    "status": "online",
-    "checked_at": "2026-11-26T03:45:52+00:00",
-    "detail": "HTTP 200 e conteúdo conferido",
+    "status": "offline",
+    "checked_at": "2026-11-26T13:15:45+00:00",
+    "detail": "Conteúdo esperado ausente",
     "slow_count": 0,
-    "response_seconds": 1.502,
-    "slow_active": false
+    "response_seconds": 0.072,
+    "slow_active": false,
+    "down_since": "2026-11-26T13:15:45+00:00"
   },
   "bio": {
     "pending": [],
-    "status": "online",
-    "checked_at": "2026-11-26T03:45:52+00:00",
-    "detail": "HTTP 200 e conteúdo conferido",
+    "status": "offline",
+    "checked_at": "2026-11-26T13:15:45+00:00",
+    "detail": "Conteúdo esperado ausente",
     "slow_count": 0,
-    "response_seconds": 2.879,
-    "slow_active": false
+    "response_seconds": 0.065,
+    "slow_active": false,
+    "down_since": "2026-11-26T13:15:45+00:00"
   },
   "_monitor": {
     "pending": [],
@@ -35,7 +37,7 @@
         "expires_at": "2027-01-08T23:49:40+00:00"
       }
     },
-    "summary_day": "2026-11-24",
+    "summary_day": "2026-11-25",
     "push_queue": [],
     "push_seen": [
       "97f13ae3861a150fea1c6aedee328dba62a055c62141a45fb7b2fdbae48ec66f",
@@ -206,17 +208,21 @@
       "a706ac6594ca7c3fc15d974324050763fd0821d007a9c869e478166a2b32619b",
       "d4953b5d5e3e8ac2ec3445c7c9c3c8692d64880d3cab848f4d4caac1d4d0200a",
       "1538ec5cbdea69d65e35ac1899c425110495cdb9de7a0ed80303b6bde32c11bc",
-      "4d88c65fbd94d00c72630c259bb89f0789b41be6ef226d60eccc60fb107d0d2e"
+      "4d88c65fbd94d00c72630c259bb89f0789b41be6ef226d60eccc60fb107d0d2e",
+      "96fc4889bbd9571a9c9417ca68c0ff16f7dc4f7a44a1f5301ddb6a84afc5c135",
+      "0db94e9d37c3fdfc72ef70ef03b5fe7c67f7e368e5845510a2228d398357028b",
+      "e763ceeb9d2eeca59be056b13b1d366b7871b1ec15af55cdef9cb54b48201257",
+      "1ebed44a57d77403e176196f5c8d98742fc71f566a5f2b630dab3a366190ef5d"
     ],
     "push_configured": true,
     "push_devices": [
       "401a2f632d28c2bb8161cb544ec16744e4d8d6935d9a330e1dac723e89eba9be"
     ],
     "last_gap": {
-      "resumed_at": "2026-11-26T03:45:52+00:00",
-      "seconds": 22234
+      "resumed_at": "2026-11-26T13:15:45+00:00",
+      "seconds": 34189
     },
-    "completed_at": "2026-11-26T03:45:56+00:00",
-    "completed_run_id": "45750971113"
+    "completed_at": "2026-11-26T13:15:58+00:00",
+    "completed_run_id": "45827405601"
   }
 }
