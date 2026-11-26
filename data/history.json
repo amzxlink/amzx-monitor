@@ -1,68 +1,5 @@
 [
   {
-    "time": "2026-10-25T14:18:09+00:00",
-    "id": "amzx",
-    "online": true,
-    "seconds": 1.874,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-25T14:18:09+00:00",
-    "id": "login",
-    "online": true,
-    "seconds": 1.434,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-25T14:18:09+00:00",
-    "id": "bio",
-    "online": true,
-    "seconds": 2.981,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-25T17:42:59+00:00",
-    "id": "amzx",
-    "online": true,
-    "seconds": 2.119,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-25T17:42:59+00:00",
-    "id": "login",
-    "online": true,
-    "seconds": 1.538,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-25T17:42:59+00:00",
-    "id": "bio",
-    "online": true,
-    "seconds": 3.086,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-25T20:01:18+00:00",
-    "id": "amzx",
-    "online": true,
-    "seconds": 1.028,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-25T20:01:18+00:00",
-    "id": "login",
-    "online": true,
-    "seconds": 0.619,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-25T20:01:18+00:00",
-    "id": "bio",
-    "online": true,
-    "seconds": 2.026,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
     "time": "2026-10-25T22:30:48+00:00",
     "id": "amzx",
     "online": true,
@@ -2643,6 +2580,27 @@
     "id": "bio",
     "online": false,
     "seconds": 0.065,
+    "detail": "Conteúdo esperado ausente"
+  },
+  {
+    "time": "2026-11-26T22:26:47+00:00",
+    "id": "amzx",
+    "online": true,
+    "seconds": 0.157,
+    "detail": "HTTP 200 e conteúdo conferido"
+  },
+  {
+    "time": "2026-11-26T22:26:47+00:00",
+    "id": "login",
+    "online": false,
+    "seconds": 0.091,
+    "detail": "Conteúdo esperado ausente"
+  },
+  {
+    "time": "2026-11-26T22:26:47+00:00",
+    "id": "bio",
+    "online": false,
+    "seconds": 0.073,
     "detail": "Conteúdo esperado ausente"
   }
 ]
