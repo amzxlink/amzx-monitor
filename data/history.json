@@ -1,152 +1,5 @@
 [
   {
-    "time": "2026-10-24T22:05:58+00:00",
-    "id": "amzx",
-    "online": true,
-    "seconds": 1.712,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-24T22:05:58+00:00",
-    "id": "login",
-    "online": true,
-    "seconds": 1.445,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-24T22:05:58+00:00",
-    "id": "bio",
-    "online": true,
-    "seconds": 2.6,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-24T22:07:22+00:00",
-    "id": "amzx",
-    "online": true,
-    "seconds": 1.614,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-24T22:07:22+00:00",
-    "id": "login",
-    "online": true,
-    "seconds": 1.243,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-24T22:07:22+00:00",
-    "id": "bio",
-    "online": true,
-    "seconds": 2.415,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-24T22:44:51+00:00",
-    "id": "amzx",
-    "online": true,
-    "seconds": 1.909,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-24T22:44:51+00:00",
-    "id": "login",
-    "online": true,
-    "seconds": 1.482,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-24T22:44:51+00:00",
-    "id": "bio",
-    "online": true,
-    "seconds": 2.946,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-24T23:30:09+00:00",
-    "id": "amzx",
-    "online": true,
-    "seconds": 1.811,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-24T23:30:09+00:00",
-    "id": "login",
-    "online": true,
-    "seconds": 1.465,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-24T23:30:09+00:00",
-    "id": "bio",
-    "online": true,
-    "seconds": 2.743,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-25T00:35:56+00:00",
-    "id": "amzx",
-    "online": true,
-    "seconds": 0.146,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-25T00:35:56+00:00",
-    "id": "login",
-    "online": false,
-    "seconds": 0.088,
-    "detail": "Conteúdo esperado ausente"
-  },
-  {
-    "time": "2026-10-25T00:35:56+00:00",
-    "id": "bio",
-    "online": false,
-    "seconds": 0.056,
-    "detail": "Conteúdo esperado ausente"
-  },
-  {
-    "time": "2026-10-25T00:49:34+00:00",
-    "id": "amzx",
-    "online": true,
-    "seconds": 1.607,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-25T00:49:34+00:00",
-    "id": "login",
-    "online": true,
-    "seconds": 1.264,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-25T00:49:34+00:00",
-    "id": "bio",
-    "online": true,
-    "seconds": 2.627,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-25T01:18:34+00:00",
-    "id": "amzx",
-    "online": true,
-    "seconds": 1.574,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-25T01:18:34+00:00",
-    "id": "login",
-    "online": true,
-    "seconds": 1.23,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-25T01:18:34+00:00",
-    "id": "bio",
-    "online": true,
-    "seconds": 2.459,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
     "time": "2026-10-25T05:19:25+00:00",
     "id": "amzx",
     "online": true,
@@ -2790,6 +2643,27 @@
     "id": "bio",
     "online": true,
     "seconds": 2.265,
+    "detail": "HTTP 200 e conteúdo conferido"
+  },
+  {
+    "time": "2026-11-26T03:45:52+00:00",
+    "id": "amzx",
+    "online": true,
+    "seconds": 1.855,
+    "detail": "HTTP 200 e conteúdo conferido"
+  },
+  {
+    "time": "2026-11-26T03:45:52+00:00",
+    "id": "login",
+    "online": true,
+    "seconds": 1.502,
+    "detail": "HTTP 200 e conteúdo conferido"
+  },
+  {
+    "time": "2026-11-26T03:45:52+00:00",
+    "id": "bio",
+    "online": true,
+    "seconds": 2.879,
     "detail": "HTTP 200 e conteúdo conferido"
   }
 ]
