@@ -1,47 +1,5 @@
 [
   {
-    "time": "2026-10-26T17:37:30+00:00",
-    "id": "amzx",
-    "online": true,
-    "seconds": 1.25,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-26T17:37:30+00:00",
-    "id": "login",
-    "online": true,
-    "seconds": 0.831,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-26T17:37:30+00:00",
-    "id": "bio",
-    "online": true,
-    "seconds": 2.212,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-26T21:53:24+00:00",
-    "id": "amzx",
-    "online": true,
-    "seconds": 1.862,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-26T21:53:24+00:00",
-    "id": "login",
-    "online": true,
-    "seconds": 1.4,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
-    "time": "2026-10-26T21:53:24+00:00",
-    "id": "bio",
-    "online": true,
-    "seconds": 2.757,
-    "detail": "HTTP 200 e conteúdo conferido"
-  },
-  {
     "time": "2026-10-27T01:16:57+00:00",
     "id": "amzx",
     "online": true,
@@ -2560,5 +2518,26 @@
     "online": true,
     "seconds": 3.336,
     "detail": "HTTP 200 e conteúdo conferido"
+  },
+  {
+    "time": "2026-11-27T22:47:39+00:00",
+    "id": "amzx",
+    "online": true,
+    "seconds": 0.503,
+    "detail": "HTTP 200 e conteúdo conferido"
+  },
+  {
+    "time": "2026-11-27T22:47:39+00:00",
+    "id": "login",
+    "online": false,
+    "seconds": 0.481,
+    "detail": "Conteúdo esperado ausente"
+  },
+  {
+    "time": "2026-11-27T22:47:39+00:00",
+    "id": "bio",
+    "online": false,
+    "seconds": 0.412,
+    "detail": "Conteúdo esperado ausente"
   }
 ]
